@@ -2,6 +2,7 @@ package ru.owopeef.oworequests.URL;
 
 import org.bukkit.plugin.Plugin;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import ru.owopeef.oworequests.Main;
 import ru.owopeef.oworequests.vk.longpoll.thread;
@@ -60,7 +61,9 @@ public class Requests {
                     thread.reloadLongPollServer();
                 }
             }
-            thread.ts = jsonResponse.getInt("ts");
+            try {
+                thread.ts = jsonResponse.getInt("ts");
+            } catch (JSONException ignored) {}
             JSONArray updates = jsonResponse.getJSONArray("updates");
             int d = 0;
             while (updates.length() != d)
